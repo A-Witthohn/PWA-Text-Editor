@@ -20,4 +20,14 @@ export const putDb = async (content) => {
   return tx.done;
 };
 
+export const getDb = async () => {
+  const db = await initdb();
+  const tx = db.transaction('jate', 'readonly');
+  const store = tx.objectStore('jate');
+  const cursor = await store.openCursor();
+  if (cursor) {
+    return cursor.value.content;
+  }
+};
+
 initdb();
