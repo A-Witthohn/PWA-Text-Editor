@@ -19,24 +19,29 @@ module.exports = () => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: 'src/index.html',
+        template: './index.html',
         filename: 'index.html'
       }),
       new WebpackPwaManifest({
-        name: 'My Progressive Web App',
-        short_name: 'MyPWA',
-        description: 'My awesome Progressive Web App!',
-        background_color: '#ffffff',
-        crossorigin: 'use-credentials',
-        icons: [
-          {
-            src: path.resolve('src/assets/images/icon.png'),
-            sizes: [96, 128, 192, 256, 384, 512]
-          }
-        ]
-      }),
+				fingerprints: false,
+				inject: true,
+				name: "Just Another Text Editor",
+				short_name: "J.A.T.E.",
+				description: "Create notes with or without an internet connection",
+				background_color: "#272822",
+				theme_color: "#272822",
+				start_url: "./",
+				publicPath: "./",
+				icons: [
+					{
+						src: path.resolve("src/images/logo.png"),
+						sizes: [96, 128, 192, 256, 384, 512],
+						destination: path.join("assets", "icons"),
+					},
+				],
+			}),
       new InjectManifest({
-        swSrc: './src/src-sw.js',
+        swSrc: './src-sw.js',
         swDest: 'sw.js'
       })
     ],
